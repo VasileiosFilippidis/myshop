@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 }
 
 export default async function ProductPage({ params }: any) {
-  const sb = supabaseServer();
+  const sb = await supabaseServer();
   const { data: p } = await sb
     .from('products')
     .select('id, slug, name, description, price_cents, product_images(url)')
