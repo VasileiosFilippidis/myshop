@@ -1,25 +1,19 @@
 import { supabaseServer } from '@/lib/supabase/server';
 import type { Metadata } from 'next';
 
-// 👇 Give our own name to avoid conflict
-interface ProductPageParams {
-  slug: string;
-}
-
-// Generate SEO metadata
-export async function generateMetadata({ params }: { params: ProductPageParams }): Promise<Metadata> {
+// Let Next infer the exact PageProps – don't annotate it
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const sb = supabaseServer();
   const { data } = await sb
     .from('products')
     .select('name, description')
     .eq('slug', params.slug)
     .single();
-
   return { title: data?.name ?? 'Product' };
 }
 
-// 👇 Use a unique local prop name instead of PageProps
-export default async function ProductPage({ params }: { params: ProductPageParams }) {
+// Again: don't force a custom type here
+export default async function ProductPage({ params }: any) {
   const sb = supabaseServer();
   const { data: p } = await sb
     .from('products')
