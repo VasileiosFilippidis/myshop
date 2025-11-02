@@ -2,7 +2,7 @@ import { supabaseServer } from '@/lib/supabase/server';
 
 
 export default async function Home() {
-const sb = supabaseServer();
+const sb = await supabaseServer();
 const { data: products } = await sb
 .from('products')
 .select('id, slug, name, price_cents, product_images(url)')

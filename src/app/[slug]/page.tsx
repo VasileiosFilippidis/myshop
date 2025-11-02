@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 // Let Next infer route prop types; avoid PageProps conflicts
 export async function generateMetadata({ params }: any): Promise<Metadata> {
-  const sb = supabaseServer();
+  const sb = await supabaseServer();
   const { data } = await sb
     .from('products')
     .select('name, description')
