@@ -1,7 +1,7 @@
 import { supabaseServer } from '@/lib/supabase/server';
 import type { Metadata } from 'next';
 
-// Let Next infer the exact PageProps – don't annotate it
+// Let Next infer route prop types; avoid PageProps conflicts
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const sb = supabaseServer();
   const { data } = await sb
@@ -12,7 +12,6 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   return { title: data?.name ?? 'Product' };
 }
 
-// Again: don't force a custom type here
 export default async function ProductPage({ params }: any) {
   const sb = supabaseServer();
   const { data: p } = await sb
