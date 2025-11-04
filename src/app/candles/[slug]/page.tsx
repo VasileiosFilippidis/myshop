@@ -2,10 +2,14 @@ import { notFound } from "next/navigation";
 import { candles } from "../../../lib/products";
 import { AddToCart } from "../../../components/AddToCart";
 
-export async function generateStaticParams() { return candles.map(p => ({ slug: p.slug })); }
+export async function generateStaticParams() {
+  return candles.map(p => ({ slug: p.slug }));
+}
 
-export default function CandleDetail({ params }: { params: { slug: string } }) {
-  const product = candles.find(p => p.slug === params.slug);
+// ✅ Note params is a Promise in Next 15 types
+export default async function CandleDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = candles.find(p => p.slug === slug);
   if (!product) return notFound();
   return (
     <div className="container-page grid lg:grid-cols-2 gap-8">
