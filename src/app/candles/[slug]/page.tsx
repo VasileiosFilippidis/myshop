@@ -6,11 +6,13 @@ export async function generateStaticParams() {
   return candles.map(p => ({ slug: p.slug }));
 }
 
-// ✅ Note params is a Promise in Next 15 types
-export default async function CandleDetail({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CandleDetail(
+  { params }: { params: Promise<{ slug: string }> }
+) {
   const { slug } = await params;
   const product = candles.find(p => p.slug === slug);
   if (!product) return notFound();
+
   return (
     <div className="container-page grid lg:grid-cols-2 gap-8">
       <div className="card overflow-hidden">

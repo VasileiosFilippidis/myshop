@@ -6,10 +6,13 @@ export async function generateStaticParams() {
   return prints.map(p => ({ slug: p.slug }));
 }
 
-export default async function PrintDetail({ params }: { params: Promise<{ slug: string }> }) {
+export default async function PrintDetail(
+  { params }: { params: Promise<{ slug: string }> }
+) {
   const { slug } = await params;
   const product = prints.find(p => p.slug === slug);
   if (!product) return notFound();
+
   return (
     <div className="container-page grid lg:grid-cols-2 gap-8">
       <div className="card overflow-hidden">
