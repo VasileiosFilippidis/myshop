@@ -1,26 +1,25 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Theme (we don't need @theme inline here) */
+:root { color-scheme: light; }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Global body + layout helpers */
+body { @apply bg-mt-bg text-mt-ink antialiased; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+.container-page { @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8; }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+.card { @apply bg-white rounded-2xl shadow-soft border border-black/5; }
+
+/* Buttons */
+.btn { @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium transition; }
+.btn-primary { @apply btn bg-mt-accent text-white hover:opacity-90; }
+.btn-secondary { @apply btn bg-mt-rose text-white hover:opacity-90; }
+.btn-ghost { @apply btn bg-transparent hover:bg-black/5; }
+
+/* Small UI bits */
+.badge { @apply inline-flex items-center gap-1 rounded-full border border-black/10 px-2.5 py-1 text-xs; }
+.input { @apply w-full rounded-xl border border-black/10 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-black/10; }
+.label { @apply block text-sm font-medium mb-1; }
+.grid-products { @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6; }

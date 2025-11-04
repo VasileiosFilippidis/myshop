@@ -1,19 +1,24 @@
+import "./globals.css";
+import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
+import { CartProvider } from "../components/CartProvider";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MadeTogether — Handmade Candles & 3D Prints",
+  description: "Two shops, one brand: Soul (candles) & Creo (3D prints).",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-return (
-<html lang="en">
-<body className="min-h-dvh antialiased">
-<header className="border-b">
-<div className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-4">
-<a href="/" className="font-semibold">MadeTogether</a>
-<nav className="ml-auto flex gap-3 text-sm">
-<a href="/candles">Candles</a>
-<a href="/prints">3D Prints</a>
-<a href="/auth">Sign in</a>
-</nav>
-</div>
-</header>
-<main className="mx-auto max-w-5xl px-4 py-6">{children}</main>
-</body>
-</html>
-);
+  return (
+    <html lang="en">
+      <body>
+        <CartProvider>
+          <Navbar />
+          <main className="min-h-dvh pt-20 pb-16">{children}</main>
+          <Footer />
+        </CartProvider>
+      </body>
+    </html>
+  );
 }
