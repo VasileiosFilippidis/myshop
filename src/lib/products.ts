@@ -7,7 +7,6 @@ export type Product = {
   image: string;
   category: string;
    meta?: { burnTime?: number };
-  };
 };
 
 
