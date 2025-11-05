@@ -6,8 +6,10 @@ export type Product = {
   price: number;
   image: string;
   category: string;
-  meta?: Record<string, unknown>;
+   meta?: { burnTime?: number };
+  };
 };
+
 
 export const prints: Product[] = [
   {
