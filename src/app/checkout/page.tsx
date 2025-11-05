@@ -17,7 +17,7 @@ export default function CheckoutPage() {
       <div className="container-page">
         <div className="card p-10 text-center">
           <h1 className="text-2xl font-semibold mb-2">Order placed 🎉</h1>
-          <p className="text-black/70">We\'ll email you the details shortly. Thank you!</p>
+          <p className="text-black/70">We`ll email you the details shortly. Thank you!</p>
       </div></div>
     );
   }

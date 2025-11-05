@@ -10,7 +10,7 @@ export default function ContactPage() {
     <div className="container-page grid md:grid-cols-2 gap-6">
       <div className="card p-6">
         <h1 className="text-2xl font-semibold mb-2">Contact</h1>
-        <p className="text-black/70 mb-4">Send us a note and we'll get back soon.</p>
+        <p className="text-black/70 mb-4">Send us a note and we`ll get back soon.</p>
 
         <form className="space-y-3" onSubmit={handleSubmit}>
           <input className="input" placeholder="Name" required />

@@ -8,11 +8,11 @@ export default function FAQPage() {
       </details>
       <details className="card p-4">
         <summary className="font-medium">Returns?</summary>
-        <p className="mt-2 text-black/70">If anything arrives damaged, contact us within 7 days and we\'ll make it right.</p>
+        <p className="mt-2 text-black/70">If anything arrives damaged, contact us within 7 days and we`ll make it right.</p>
       </details>
       <details className="card p-4">
         <summary className="font-medium">Custom 3D parts?</summary>
-        <p className="mt-2 text-black/70">Email us your idea with photos or dimensions — we\'ll quote and lead time.</p>
+        <p className="mt-2 text-black/70">Email us your idea with photos or dimensions — we`ll quote and lead time.</p>
       </details>
     </div>
   );

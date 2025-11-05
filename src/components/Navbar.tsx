@@ -1,26 +1,68 @@
-"use client";
+// src/components/Navbar.tsx
 import Link from "next/link";
-import { useCart } from "./CartProvider";
+import { createClient } from "@/lib/supabase";
 
-export function Navbar() {
-  const { count } = useCart();
+export async function Navbar() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let isAdmin = false;
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", user.id)
+      .single();
+    isAdmin = !!profile?.is_admin;
+  }
+
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-black/5 bg-white/80 backdrop-blur">
-      <nav className="container-page h-16 flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <Link href="/" className="font-semibold">MadeTogether</Link>
-          <div className="hidden sm:flex items-center gap-4 text-sm">
-            <Link href="/prints" className="hover:underline">3D Prints</Link>
-            <Link href="/candles" className="hover:underline">Candles</Link>
-            <Link href="/about" className="hover:underline">About</Link>
-            <Link href="/faq" className="hover:underline">FAQ</Link>
-            <Link href="/contact" className="hover:underline">Contact</Link>
-          </div>
-        </div>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b shadow-sm">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo / Brand */}
+        <Link href="/" className="text-lg font-semibold tracking-tight">
+          MadeTogether
+        </Link>
+
+        {/* Right-side links */}
         <div className="flex items-center gap-3">
-          <Link href="/cart" className="btn-ghost">Cart ({count})</Link>
+          {!user ? (
+            <>
+              <Link
+                href="/login"
+                className="px-3 py-1 border rounded hover:bg-neutral-50"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="px-3 py-1 rounded bg-black text-white"
+              >
+                Register
+              </Link>
+            </>
+          ) : (
+            <>
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className="px-3 py-1 border rounded hover:bg-neutral-50"
+                >
+                  Admin
+                </Link>
+              )}
+              <Link
+                href="/logout"
+                className="px-3 py-1 rounded bg-black text-white"
+              >
+                Logout
+              </Link>
+            </>
+          )}
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 }

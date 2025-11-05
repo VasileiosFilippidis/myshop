@@ -17,13 +17,15 @@ type CartCtx = {
 const Ctx = createContext<CartCtx | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
-
-  // Persist in localStorage for demo
-  useEffect(() => {
-    const raw = localStorage.getItem("mt_cart");
-    if (raw) setItems(JSON.parse(raw));
-  }, []);
+  const [items, setItems] = useState<CartItem[]>(() => {
+   if (typeof window === "undefined") return [];
+   try {
+     const raw = localStorage.getItem("mt_cart");
+     return raw ? (JSON.parse(raw) as CartItem[]) : [];
+   } catch {
+     return [];
+   }
+});
   useEffect(() => {
     localStorage.setItem("mt_cart", JSON.stringify(items));
   }, [items]);

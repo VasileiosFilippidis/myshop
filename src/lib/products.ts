@@ -6,7 +6,7 @@ export type Product = {
   price: number;
   image: string;
   category: string;
-  meta?: Record<string, any>;
+  meta?: Record<string, unknown>;
 };
 
 export const prints: Product[] = [
